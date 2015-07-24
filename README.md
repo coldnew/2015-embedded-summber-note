@@ -4,3 +4,4 @@
 > 原始資訊請見 [hackpad](https://embedded2015.hackpad.com/2015--OsxFmQOf0cd)
 
 為什麼不全部寫在 hackpad? 因為他不好用.....Orz....
+這份文建會盡可能和我的hackpad同步，但會主要以這份為主。(因為這份是整理過的)
