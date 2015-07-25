@@ -1,1 +1,16 @@
-{}
+{
+    "gitbook": ">=2.0.0",
+    "title": "2015-embedded-summber-note",
+    "language": "zh-tw",
+    "plugins": [
+        "addcssjs"
+    ],
+    "pluginsConfig": {
+        "addcssjs": {
+            "js": [
+                "styles/website.js"
+            ],
+            "css": []
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "2015-embedded-summber-note",
+  "version": "0.0.1",
+  "description": "",
+  "author": {
+    "name": "Yen-Chin, Lee",
+    "email": "coldnew.tw@gmail.com"
+  },
+  "homepage": "http://coldnew.github.io",
+  "license": "MIT",
+  "devDependencies": {
+    "gitbook-plugin-addcssjs": "0.0.1",
+    "highlight.js": "^8.6.0"
+  },
+  "scripts": {}
+}
