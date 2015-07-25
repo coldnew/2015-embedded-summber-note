@@ -1,6 +1,9 @@
 # 請實現ARM版本的Brainf*ck JIT compiler
 
-此題為課堂作業，題目是根據 [jserv/jit-construct](https://github.com/jserv/jit-construct.git) 以及[Interpreter, Compiler, JIT from scratch](http://wiki.csie.ncku.edu.tw/embedded/summer2015/jit-compiler.pdf) 這份投影片來實作ARM版本的Brainf*ck JIT compiler，由於最新的commit已經把ARM版本的加進去了，我們可以使用以下命令來切換到commit `0d9eb7a` 這一版本去實現我們自己的ARM版的Brainf*ck JIT compiler。
+此題為課堂作業，題目是根據 [jserv/jit-construct](https://github.com/jserv/jit-construct.git) 以及[Interpreter, Compiler, JIT from scratch](http://wiki.csie.ncku.edu.tw/embedded/summer2015/jit-compiler.pdf) 這份投影片來實作ARM版本的Brainf*ck JIT compiler。
+
+由於最新的commit已經把ARM版本的加進去了，我們可以使用以下命令來切換到commit
+`0d9eb7a` 這一版本去實現我們自己的ARM版的Brainf*ck JIT compiler。
 
 
 ```
