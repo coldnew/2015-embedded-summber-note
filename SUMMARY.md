@@ -6,3 +6,5 @@
        * [請問以下的 DETECT 巨集用途是什麼 ?](1st_batch/day1_exame.md)
 * [第一梯次 Day 2 (7/17 ~ 7/19, 2015)](1st_batch/day2.md)
 * [第一梯次 Day 3 (7/17 ~ 7/19, 2015)](1st_batch/day3.md)
+* [課堂考試題目與解答](exame/intro.md)
+   * [請問以下的 DETECT 巨集用途是什麼 ?](exame/detect_macro.md)
