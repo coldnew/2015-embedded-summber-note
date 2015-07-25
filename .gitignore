@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Django stuff:
+*.log
+
+#
+*.pid.sass-cache/
+__pycache__/
+static/
+output/
+output-publish/
+node_modules/
+bower_components/
+tmp/
+.deploy/
+/.publish/
+_book/
+.DS_Store
