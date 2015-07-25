@@ -61,5 +61,5 @@ setInterval(function() {
 }, 100);
 
 // add extra highlight.js support
-//loadJS('https://code.jquery.com/jquery-2.1.4.min.js');
+loadJS('https://code.jquery.com/jquery-2.1.4.min.js');
 //loadJS(getScriptURL('load.js'));

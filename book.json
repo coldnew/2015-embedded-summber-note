@@ -9,7 +9,6 @@
         "addcssjs": {
             "js": [
                 "styles/website.js",
-                "https://code.jquery.com/jquery-2.1.4.min.js",
                 "styles/highlight.pack.js",
                 "styles/extra.js"
             ],
