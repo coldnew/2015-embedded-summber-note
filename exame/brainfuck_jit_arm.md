@@ -1,6 +1,7 @@
 # 請實現ARM版本的Brainf*ck JIT compiler
 
-請取得
+此題為課堂作業，題目是
+
 
 ```
     git clone https://github.com/jserv/jit-construct.git
