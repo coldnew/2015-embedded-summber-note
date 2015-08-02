@@ -1,0 +1,84 @@
+#+TITLE: 2015 嵌入式系統暑期課程學習筆記
+
+#+BEGIN_QUOTE
+這是我去修 jserv 所開的 2015 嵌入式系統暑期課程的學習筆記，目前正在整理中
+原始資訊請見 [[hackpad][https://embedded2015.hackpad.com/2015--OsxFmQOf0cd]]
+#+END_QUOTE
+
+為什麼不全部寫在 hackpad? 因為我覺得他不好用.....Orz....
+這份文建會盡可能和我的 hackpad 同步，但會主要以這份為主。(因為這份是整理過的)
+
+目前這份文件仍舊在建構中....很多編排可能都會重新修正....
+
+#+BEGIN_QUOTE
+目前預計完成日: 2015, 10, 30
+#+END_QUOTE
+
+碎碎念..... 原本我想努力習慣 Markdown 這個東西，但是他還是很悲劇....看樣子我要準
+備寫一個 org-gitbook 轉換器了 Orz...
+
+
+
+* Introduction
+
+* 課堂考試題目、作業與解答
+
+這邊收集的是 Jserv 在課堂上的考試內容，以及我自己重新整理後的答案，僅供參考使用。
+
+** 請問以下的 DETECT 巨集用途是什麼 ?
+
+此題主要測試對位元運算的理解，那到底以下的 =DETECT= 巨集具有怎樣的用途呢?
+
+#+BEGIN_SRC c
+  #if LONG_MAX == 2147483647L
+  #define DETECT(X) (((X) - 0x01010101) & ~(X) & 0x80808080)
+  #else
+  #if LONG_MAX == 9223372036854775807L
+  #define DETECT(X) (((X) - 0x0101010101010101) & ~(X) & 0x8080808080808080)
+  #else
+  #error long int is not a 32bit or 64bit type.
+  #endif
+  #endif
+#+END_SRC
+
+*** 我的解答
+
+這個巨集上是用來測試輸入內容是否為 0，此巨集很常使用在 =strlen= 或是 =strcap= 等字串
+處理的函式上，我們可以從 Apple 的 [[http://opensource.apple.com/source/Libc/Libc-583/arm/string/strlen.s][strlen]] 或是其他 libc 中看到這巨集的影子。
+
+#+BEGIN_SRC asm
+  Laligned_loop:
+      /* ((x - 0x01010101) & ~x & 0x80808080) == hasnull(word) */
+      sub     r3, r2, r1      /* x - 0x01010101 */
+      bic     r3, r3, r2      /* above & ~x */
+      tst     r3, r1, lsl #7  /* above & 0x80808080 */
+      ldreq   r2, [r0], #4    /* load next word */
+      beq     Laligned_loop
+#+END_SRC
+
+
+所以到底為什麼這個巨集可以用來偵測 =Null char= ，使用他到底能夠為 =strlen= 等函式增
+加怎樣的優點？我們可以自己用 C 語言來試著去實作 =strlen= 這個函式看看，於是我們很快
+的完成了這個函式：
+
+#+BEGIN_SRC c
+  unsigned int strlen (const char *s)
+  {
+          char *p = s;
+
+          while (*p != '\0') {
+                  p++;
+          }
+
+          return (p - s);
+  }
+#+END_SRC
+
+這樣的實作到底有什麼問題呢？首先注意到我們每一次只能檢查 =一個 byte= 大小的資訊，
+想想看在 32-bit 系統上，CPU 一次是處理 4-byte 大小的資訊，不覺得有點浪費嗎?(用在
+64-bit 上面問題就更嚴重了）
+
+*** 參考資料
+
+
+** 請實現 ARM 版本的 Brainf*ck JIT compiler
