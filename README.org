@@ -82,3 +82,79 @@
 
 
 ** 請實現 ARM 版本的 Brainf*ck JIT compiler
+
+
+** 請設計一個運作在32-bit系統上演算法，找出兩個數裡面較大的數
+
+這個題目要求不得使用 if-else 或 < > 一類比較的運算子
+
+Hint: (a - b) 的正負號，搭配乘法
+
+*** 參考解答
+
+題目要求我們找出較大的數值，但是不能使用 > < 之類的 operator, 為了便於之後的比較，
+我們先實作一個簡易的函式用來尋找數入項目是正整數還是負整數
+
+#+BEGIN_SRC c
+  int sign(int32_t a)
+  {
+          return 1 ^ ((a >> 31) & 0x1);
+  }
+#+END_SRC
+
+#+BEGIN_SRC c
+  int max(int32_t a, int32_t b)
+  {
+          return a * sign(a - b) + b * (1 ^ sign(a - b));
+  }
+#+END_SRC
+
+這樣的解法在 (a - b) 下可能會出現 Overflow 的狀況，怎樣說呢？假如我們對 a、b兩個
+變數這樣進行設定
+
+#+BEGIN_SRC c
+  int a = INT_MAX - 2;
+  int b = -8;
+
+  a - b; // Overflow
+
+
+  #include <stdio.h>
+  #include <limits.h>
+  #include <stdint.h>
+
+  int sign(int32_t a)
+  {
+          return 1 ^ ((a >> 31) & 0x1);
+  }
+
+  int max1(int32_t a, int32_t b)
+  {
+          return a * sign(a - b) + b * (1 ^ sign(a - b));
+  }
+
+  int max2(int32_t a, int32_t b)
+  {
+          return a * sign(a - b) + b * (1 ^ sign(a - b));
+  }
+
+  int main(int argc, char *argv[])
+  {
+          printf("max1(5, 3) = %d\n", max1(5, 3));
+          printf("max1(3, 5) = %d\n", max1(3, 5));
+          printf("\n");
+
+          printf("max1(-5, -3) = %d\n", max1(-5, -3));
+          printf("max1(-3, -5) = %d\n", max1(-3, -5));
+          printf("\n");
+
+          // failed
+          printf("max1(INT_MAX - 2, -15) = %d\n", max1(INT_MAX - 2, -15));
+          printf("max1(-15, INT_MAX) = %d\n",     max1(-15, INT_MAX));
+
+          return 0;
+  }
+#+END_SRC
+
+
+** 給定一個 5 bit 的數值，最少需要幾次猜測，就可知道正確答案？
